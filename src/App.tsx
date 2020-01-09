@@ -1,38 +1,106 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import AppBar from '@material-ui/core/AppBar';
-import { Toolbar, IconButton, Typography, Button, makeStyles } from '@material-ui/core';
+import {
+    AppBar,
+    Button,
+    Drawer,
+    IconButton,
+    List,
+    ListItem,
+    ListItemIcon, ListItemText,
+    makeStyles,
+    Toolbar,
+    Typography
+} from "@material-ui/core";
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-}))
+import {Email, SportsBasketball} from '@material-ui/icons';
+
+const drawerWidth = 300;
+
+const useStyles = makeStyles({
+    root: {
+        display: 'flex',
+    },
+    appBar: {
+        width: `calc(100% - ${drawerWidth}px)`,
+        marginLeft: drawerWidth,
+    },
+    menuButton: {
+        marginRight: 2,
+    },
+    title: {
+        flexGrow: 1,
+    },
+    drawer: {
+        width: drawerWidth,
+        flexShrink: 0
+    },
+    drawerPaper: {
+        width: drawerWidth,
+    },
+    drawerContent: {
+        display: 'flex',
+        flexFlow: 'column nowrap',
+        flexGrow: 'inherit'
+    },
+    drawerTitle: {
+        flexBasis: 64,
+        flexShrink: 0
+    },
+    drawerList: {
+        flexGrow: 1,
+        backgroundColor: 'tomato'
+    },
+    content: {
+        flexGrow: 1,
+        backgroundColor: 'white',
+        paddingTop: 64,
+    },
+});
 
 const App: React.FC = () => {
-  const classes = useStyles();
+    const classes = useStyles();
 
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton className={classes.menuButton} edge="start" color="inherit" aria-label="menu">
-          </IconButton>
-          <Typography className={classes.title} variant="h6" >
-            News
-          </Typography>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
-}
+    return (
+        <div className={classes.root}>
+            <AppBar position="fixed" className={classes.appBar}>
+                <Toolbar>
+                    <IconButton className={classes.menuButton} edge="start" color="inherit" aria-label="menu">
+                    </IconButton>
+                    <Typography className={classes.title} variant="h6">
+                        News
+                    </Typography>
+                    <Button color="inherit">Login</Button>
+                </Toolbar>
+            </AppBar>
+            <Drawer className={classes.drawer}
+                    classes={{
+                        paper: classes.drawerPaper,
+                    }}
+                    variant="permanent"
+                    anchor="left"
+                    open={true}>
+                <div className={classes.drawerContent}>
+                    <div className={classes.drawerTitle}></div>
+                    <div className={classes.drawerList}>
+                        <List>
+                            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                                <ListItem button key={text}>
+                                    <ListItemIcon>{index % 2 === 0 ? <Email/> : <SportsBasketball/>}</ListItemIcon>
+                                    <ListItemText primary={text}/>
+                                </ListItem>
+                            ))}
+                        </List>
+                    </div>
+                </div>
+            </Drawer>
+            <main className={classes.content}>
+                <div>
+                    i am content
+                </div>
+            </main>
+        </div>
+    );
+};
 
 export default App;
