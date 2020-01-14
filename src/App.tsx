@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import {
     AppBar,
     Button,
@@ -7,13 +6,15 @@ import {
     IconButton,
     List,
     ListItem,
-    ListItemIcon, ListItemText,
+    ListItemIcon,
+    ListItemText,
     makeStyles,
     Toolbar,
     Typography
 } from "@material-ui/core";
 
 import {Email, SportsBasketball} from '@material-ui/icons';
+import NBA from "./nba/nba";
 
 const drawerWidth = 300;
 
@@ -56,11 +57,14 @@ const useStyles = makeStyles({
         backgroundColor: 'white',
         paddingTop: 64,
     },
+    mainContent: {
+        height: "100%",
+        width: "100%"
+    }
 });
 
 const App: React.FC = () => {
     const classes = useStyles();
-
     return (
         <div className={classes.root}>
             <AppBar position="fixed" className={classes.appBar}>
@@ -95,8 +99,8 @@ const App: React.FC = () => {
                 </div>
             </Drawer>
             <main className={classes.content}>
-                <div>
-                    i am content
+                <div className={classes.mainContent}>
+                    <NBA></NBA>
                 </div>
             </main>
         </div>
