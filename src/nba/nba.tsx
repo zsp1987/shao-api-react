@@ -1,10 +1,15 @@
 import React from 'react';
-import {Paper} from "@material-ui/core";
-
+import { Box, Grid, Container } from '@material-ui/core';
 const NBA = () => {
-    return (<Paper>
-        <div>nba detail</div>
-    </Paper>)
+    return (
+        <Box m={4} width="100%">
+            <Grid container justify="center">
+                <Grid xs={6}>
+                    <Container>nba detail</Container>
+                </Grid>
+            </Grid>
+        </Box>
+    );
 };
 
 export default NBA;
